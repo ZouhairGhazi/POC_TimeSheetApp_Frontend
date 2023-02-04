@@ -1,0 +1,22 @@
+<mat-tab-group>
+  <mat-tab label="My calendar">  
+    My calendar
+  </mat-tab>
+
+  <mat-tab label="Edit my times">
+    <br>
+    <div class="edit_times">
+      <mat-form-field appearance="fill">
+        <mat-label>Choose a date</mat-label>
+        <input matInput [formControl]="datepicked" [matDatepicker]="picker"/>
+        <mat-hint>MM/DD/YYYY</mat-hint>
+        <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+        <mat-datepicker #picker></mat-datepicker>
+      </mat-form-field>
+    </div>
+  </mat-tab>
+
+  <mat-tab label="Monthly report">
+    Monthly report 
+  </mat-tab>
+</mat-tab-group>
