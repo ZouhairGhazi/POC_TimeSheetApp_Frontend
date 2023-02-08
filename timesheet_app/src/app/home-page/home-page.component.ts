@@ -134,6 +134,11 @@ export class HomePageComponent {
   openSnackBar(response: any){
     if (response){
       this._snackBar.open("Task successfully created !", "Nice !");
+      this.startGroupHour.reset();
+      this.startGroupDate.reset();
+      this.endGroupHour.reset();
+      this.endGroupDate.reset();
+      this.projects.reset();
       this.router.navigate(['/home-page']);
     }
   }

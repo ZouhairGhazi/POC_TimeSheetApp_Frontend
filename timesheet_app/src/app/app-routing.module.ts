@@ -13,7 +13,7 @@ const routes: Routes = [
   {path:'users-list',component:UsersListComponent},
   {path:'landing-page',component:LandingPageComponent},
   {path:'home-page-manager',component:HomePageManagerComponent},
-  {path:'users/:userId/times',component:UserTimesComponent}
+  {path:'users/:userId/times/:firstname',component:UserTimesComponent}
 ];
 
 @NgModule({

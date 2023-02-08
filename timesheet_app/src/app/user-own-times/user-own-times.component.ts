@@ -4,6 +4,7 @@ import { MatTableDataSource } from "@angular/material/table";
 import { MatPaginator } from "@angular/material/paginator";
 import { MatSort } from "@angular/material/sort";
 import { UserControllerService } from "../services/user-controller.service";
+import { UserAuthService } from '../services/user-auth.service';
 
 export interface TimeData {
   date_start: string;
@@ -12,17 +13,14 @@ export interface TimeData {
 }
 
 @Component({
-  selector: 'app-user-times',
-  templateUrl: './user-times.component.html',
-  styleUrls: ['./user-times.component.css']
+  selector: 'app-user-own-times',
+  templateUrl: './user-own-times.component.html',
+  styleUrls: ['./user-own-times.component.css']
 })
-export class UserTimesComponent {
-  userId =  this.route.snapshot.paramMap.get('userId')
-  firstname = this.route.snapshot.paramMap.get('firstname');
+export class UserOwnTimesComponent {
 
-  ngOnInit() {
-    console.log(this.userId)
-  }
+  userId;
+
   timeArray: TimeData[] = [];
 
   displayedColumns: string[] = ['Start time', 'End time', 'Project'];
@@ -31,7 +29,9 @@ export class UserTimesComponent {
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
 
-  constructor(private route: ActivatedRoute,private userControllerService: UserControllerService) {
+  constructor(private route: ActivatedRoute,private userControllerService: UserControllerService, private userAuthService: UserAuthService) {
+
+    this.userId = this.userAuthService.getId();
 
     const fetched_times = this.userControllerService.getTimesOfUser(this.userId);
 
@@ -72,4 +72,5 @@ export class UserTimesComponent {
       this.dataSource.paginator.firstPage();
     }
   }
+
 }

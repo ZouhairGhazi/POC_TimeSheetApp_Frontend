@@ -1,0 +1,28 @@
+<div class="container">
+  <form  [formGroup]="createUserForm" (ngSubmit)="createUser()" class="signin-form">
+  <div class="">
+    <label class="form-control-placeholder" for="username">Username</label>
+    <input type="text" class="form-control" formControlName="username" required>    
+  </div>
+  <div class="">
+    <label class="form-control-placeholder" for="firstname">Firstname</label>
+    <input type="text" class="form-control" formControlName="firstname" required>
+  </div>
+  <div class="">
+    <label class="form-control-placeholder" for="lastname">Lastname</label>
+    <input type="text" class="form-control" formControlName="lastname" required>   
+  </div>
+  <div class="">
+    <label class="form-control-placeholder" for="email">Email</label>
+    <input type="text" class="form-control" formControlName="email" required>
+  </div>
+  <div class="">
+    <label class="form-control-placeholder" for="password">Password</label>
+    <input type="text" formControlName="password" class="form-control" required>
+  </div>
+  <br>
+  <div class="form-group">
+    <button type="submit" [disabled]="!createUserForm.valid" class="form-control btn rounded submit px-3">Create user</button>
+  </div>
+  </form>
+</div>

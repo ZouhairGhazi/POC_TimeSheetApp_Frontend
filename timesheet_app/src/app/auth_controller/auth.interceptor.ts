@@ -30,7 +30,7 @@ export class AuthInterceptor implements HttpInterceptor{
                     else if(err.status===403){
                         this.router.navigate(['/forbiden']);
                     }
-                    return throwError("Something is wrong");
+                    return throwError(err);
                 }
             )
 

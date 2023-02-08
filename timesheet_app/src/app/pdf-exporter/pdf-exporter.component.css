@@ -1,0 +1,18 @@
+.example-month-picker .mat-calendar-period-button {
+  pointer-events: none;
+}
+
+.example-month-picker .mat-calendar-arrow {
+  display: none;
+}
+
+.pdf-exporter{
+  display: flex;
+  justify-content: center;
+  margin-top: 7%;
+  width: 100%;
+}
+
+.submit {
+  margin-left: 47%;
+}

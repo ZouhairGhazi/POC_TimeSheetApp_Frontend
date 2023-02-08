@@ -40,6 +40,10 @@ import { LandingPageComponent } from './landing-page/landing-page.component';
 import { HomePageManagerComponent } from './home-page-manager/home-page-manager.component';
 import { ProjectsListComponent } from './projects-list/projects-list.component';
 import { UserTimesComponent } from './user-times/user-times.component';
+import { PdfExporterComponent } from './pdf-exporter/pdf-exporter.component';
+import { UserOwnTimesComponent } from './user-own-times/user-own-times.component';
+import { AddUserComponent } from './add-user/add-user.component';
+import { AddProjectComponent } from './add-project/add-project.component';
 
 
 @NgModule({
@@ -53,7 +57,11 @@ import { UserTimesComponent } from './user-times/user-times.component';
     LandingPageComponent,
     HomePageManagerComponent,
     ProjectsListComponent,
-    UserTimesComponent
+    UserTimesComponent,
+    PdfExporterComponent,
+    UserOwnTimesComponent,
+    AddUserComponent,
+    AddProjectComponent
   ],
   imports: [
     BrowserModule,

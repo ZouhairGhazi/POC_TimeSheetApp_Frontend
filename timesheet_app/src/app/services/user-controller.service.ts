@@ -25,8 +25,19 @@ export class UserControllerService {
     return this.httpclient.post(this.PATH_OF_API + "/times", request);
   }
 
-  public getTimesOfUser(user_id: string | null){
+  public getTimesOfUser(user_id: string | number | null){
     return this.httpclient.get(this.PATH_OF_API + "/times/" + user_id)
   }
-  
+
+  public exportToPdf(userID: number, date: string){
+    return this.httpclient.get(this.PATH_OF_API + "/times/" + userID + "/date/" + date + "/export/pdf", { responseType: 'blob' })
+  }
+
+  public createUser(userID: number, request: object){
+    return this.httpclient.post(this.PATH_OF_API + "/users/create/" + userID, request);
+  }
+
+  public createProject(username: string, request: object){
+    return this.httpclient.post(this.PATH_OF_API + "/projects/" + username, request);
+  }
 }
