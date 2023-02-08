@@ -1,0 +1,16 @@
+<div class="container">
+  <form  [formGroup]="createProjectForm" (ngSubmit)="createProject()" class="signin-form">
+  <div class="">
+    <label class="form-control-placeholder" for="title">Title</label>
+    <input type="text" class="form-control" formControlName="title" required>    
+  </div>
+  <div class="">
+    <label class="form-control-placeholder" for="description">Description</label>
+    <input type="text" class="form-control" formControlName="description" required>
+  </div>
+  <br>
+  <div class="form-group">
+    <button type="submit" [disabled]="!createProjectForm.valid" class="form-control btn rounded submit px-3">Create project</button>
+  </div>
+  </form>
+</div>
