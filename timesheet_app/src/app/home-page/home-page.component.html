@@ -4,19 +4,92 @@
   </mat-tab>
 
   <mat-tab label="Edit my times">
-    <br>
     <div class="edit_times">
-      <mat-form-field appearance="fill">
-        <mat-label>Choose a date</mat-label>
-        <input matInput [formControl]="datepicked" [matDatepicker]="picker"/>
-        <mat-hint>MM/DD/YYYY</mat-hint>
-        <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
-        <mat-datepicker #picker></mat-datepicker>
-      </mat-form-field>
+      <mat-grid-list cols="2" rowHeight="125px">
+        <div class="cards">
+          <form [formGroup]="edit_time" (ngSubmit)="add_time()" class="signin-form">
+          <div>
+            <mat-grid-tile [rowspan]=2>
+              <mat-card class="edit_times_card">
+                <mat-card-header>Start time</mat-card-header> 
+                <mat-card-subtitle class="card_header">Enter start date & hour</mat-card-subtitle>
+                <br>
+                <mat-form-field>
+                  <div [formGroup]="startGroupHour" class="toggle-time">
+                    <input matInput formControlName="pickedStartHour" [ngxTimepicker]="toggleTimepickerStart" [format]="24" readonly required>
+                    <ngx-material-timepicker #toggleTimepickerStart></ngx-material-timepicker>
+                  </div>
+                </mat-form-field>
+                <mat-form-field>
+                  <div [formGroup]="startGroupDate">
+                    <input 
+                      matInput formControlName="pickedStartDate" 
+                      [matDatepicker]="pickedStartDatePicker" 
+                      [min]="minDate"
+                      [max]="maxDate"
+                      (click)="pickedStartDatePicker.open()"
+                      required
+                    />
+                  </div>
+                  <mat-datepicker-toggle matSuffix [for]="pickedStartDatePicker"></mat-datepicker-toggle>
+                  <mat-datepicker #pickedStartDatePicker></mat-datepicker>
+                </mat-form-field>
+              </mat-card>
+            </mat-grid-tile>
+          </div>
+          <div>
+            <mat-grid-tile [rowspan]=2>
+              <mat-card class="edit_times_card">
+                <mat-card-header>End time</mat-card-header> 
+                <mat-card-subtitle class="card_header">Enter end date & hour</mat-card-subtitle>
+                <br>
+                <mat-form-field>
+                  <div [formGroup]="endGroupHour" class="toggle-time">
+                    <input matInput formControlName="pickedEndHour" [ngxTimepicker]="toggleTimepickerEnd" [format]="24" readonly required>
+                    <ngx-material-timepicker #toggleTimepickerEnd></ngx-material-timepicker>
+                  </div>
+                </mat-form-field>
+                  <mat-form-field>
+                    <div [formGroup]="endGroupDate">
+                      <input 
+                        matInput formControlName="pickedEndDate" 
+                        [matDatepicker]="pickedEndDatePicker" 
+                        [min]="minDate"
+                        [max]="maxDate"
+                        (click)="pickedEndDatePicker.open()"
+                        required
+                      />
+                    </div>
+                    <mat-datepicker-toggle matSuffix [for]="pickedEndDatePicker"></mat-datepicker-toggle>
+                    <mat-datepicker #pickedEndDatePicker></mat-datepicker>
+                  </mat-form-field>
+              </mat-card>
+            </mat-grid-tile>
+          </div>
+          <mat-grid-tile [colspan]=2 [rowspan]=1>
+            <div [formGroup]="projects" class="projects-list">
+              <mat-form-field appearance="fill">
+                <mat-label>Projects</mat-label>
+                <mat-select formControlName="pickedProject" required>
+                  <mat-option *ngFor="let project of userArray" [value]="project.viewValue">
+                    {{project.viewValue}}
+                  </mat-option>
+                </mat-select>
+              </mat-form-field>
+            </div>
+          </mat-grid-tile>
+          <mat-grid-tile [colspan]=2 [rowspan]=1>
+            <button type="submit" [disabled]="!startGroupDate.valid || !startGroupHour.valid || !endGroupHour.valid || !endGroupDate.valid || !projects.valid " 
+              mat-stroked-button>Add time
+            </button>
+          </mat-grid-tile>
+        </form>
+        </div>
+      </mat-grid-list>
     </div>
   </mat-tab>
 
   <mat-tab label="Monthly report">
-    Monthly report 
+    
   </mat-tab>
 </mat-tab-group>

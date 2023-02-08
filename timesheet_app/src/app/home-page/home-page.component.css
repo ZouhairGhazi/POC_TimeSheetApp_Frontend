@@ -1,4 +1,23 @@
 .edit_times{
   display: flex;
   justify-content: center;
+  margin-top: 2%;
+  width: 100%;
+}
+
+.cards {
+  width: 1000px;
+}
+
+.card_header{
+  margin-left: 4%;
+}
+
+.toggle-time{
+  margin-left: 100px;
+  width: 500px;
+}
+
+.edit_times_card{
+  width: 350px;
 }

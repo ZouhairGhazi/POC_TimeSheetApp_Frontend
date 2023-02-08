@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, FormControl, Validators } from '@angular/forms';
+import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
+import { UserAuthService } from '../services/user-auth.service';
+import { UserService } from '../services/user.service';
 
 @Component({
   selector: 'app-login-form',
@@ -9,25 +12,58 @@ import { FormBuilder, FormGroup, FormControl, Validators } from '@angular/forms'
 
 export class LoginFormComponent implements OnInit {
 
-  loginForm: FormGroup;
+  showText: Boolean = false;
+  loginForm: FormGroup = new FormGroup({
+    username: new FormControl('', [Validators.required]),
+    password: new FormControl('', Validators.required)
+  });
 
-  constructor() {
-    this.loginForm = new FormGroup({
-      email: new FormControl('', [Validators.required, Validators.email]),
-      password: new FormControl('', Validators.required)
-    });
+  constructor(private userService:UserService, private userAuthService:UserAuthService, private router: Router) {
+
   }
 
   ngOnInit() {
-    console.log(this.loginForm.value);
+    
   }
 
-  get email() { return this.loginForm.get('email'); }
-  get password() { return this.loginForm.get('password'); }
+  login() {
 
-  onSubmit() {
-    //console.log(this.loginForm.value);
+    this.userService.login(this.loginForm.value).subscribe((response:any) => {
+
+      this.userAuthService.setToken(response.authenticationToken);
+      this.userService.info(response.authenticationToken, response.username).subscribe((info_response:any) => {
+        
+        this.userAuthService.setId(info_response.userId);
+        this.userAuthService.setRole(info_response.role.id);
+        this.userAuthService.setUsername(info_response.username);
+        this.userAuthService.setFirstname(info_response.firstname);
+        if (this.userAuthService.getRole() === 1){
+          this.router.navigate(['/home-page']);
+        }
+  
+        else if (this.userAuthService.getRole() === 2){
+          this.router.navigate(['/home-page-manager']);
+        }
+  
+        else {
+          this.router.navigate(['/home-page']);
+        }
+      },
+      (error)=>{
+        console.log(error);
+        this.router.navigate(['/error-page']);
+        //add error message here
+      })
+  
+    },
+    (error)=>{
+      console.log(error);
+      this.showText = true;
+      this.router.navigate(['/login-form']);
+      //add error message here
+    }
+    )
+  
   }
-
 }
 
